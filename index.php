@@ -71,9 +71,9 @@ $books = getAllBooks($mysqli);
                                 <?= $book['genere'] ?>
                             </td>
                             <td>
-                                <a class="btn btn-danger" href="delete.php?action=delete&id=<?= $book['id'] ?>"
+                                <a class="btn btn-danger" href="gestione.php?action=delete&id=<?= $book['id'] ?>"
                                     role="button">X</a>
-                                <a class="btn btn-warning" href="edit.php?id=<?= $book['id'] ?>" role="button">EDIT</a>
+                                <a class="btn btn-warning" href="insert.php?action=update&id=<?= $book['id'] ?>" role="button">EDIT</a>
                             </td>
                         </tr>
                     <?php }

@@ -1,3 +1,18 @@
+<?php 
+
+    require_once 'config.php';
+    require_once 'functions.php';
+
+    if((isset($_REQUEST['action']) && $_REQUEST['action'] === 'update') && isset($_GET['id']) ) {
+        echo 'voglio modificare id ' . $_GET['id'];
+        $book = getBookByID($mysqli);
+        #print_r($book);
+    }
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,26 +44,34 @@
     </nav>
 
     <div class="container">
-        <h1 class="my-5 text-center">Inserisci un nuovo libro</h1>
+        <h1 class="my-5 text-center">
+            <?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){echo 'Modifica un libro esistente';} else{echo 'Inserisci un nuovo libro';}?>
+        </h1>
 
-        <form method="post" action="gestione.php" class="my-5">
+        <form method="post" action="<?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){echo "gestione.php?action=update&id=". $_GET['id'];}  else{echo 'gestione.php';}?>" class="my-5">
             <div class="mb-3">
                 <label for="titolo" class="form-label">Titolo</label>
-                <input type="text" class="form-control" id="titolo" placeholder="Titolo..." name="titolo">
+                <input type="text" value="<?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){
+                    echo($book['titolo']);} else {echo '';}?>" class="form-control" id="titolo" placeholder="Titolo..." name="titolo">
             </div>
             <div class="mb-3">
                 <label for="autore" class="form-label">Autore</label>
-                <input type="text" class="form-control" id="autore" placeholder="Autore..." name="autore">
+                <input type="text" value="<?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){
+                    echo($book['autore']);} else {echo '';}?>" class="form-control" id="autore" placeholder="Autore..." name="autore">
             </div>
             <div class="mb-3">
                 <label for="anno" class="form-label">Anno di pubblicazione</label>
-                <input type="number" class="form-control" id="anno" placeholder="Anno di pubblicazione..." name="anno">
+                <input type="number" value="<?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){
+                    echo($book['anno']);} else {echo '';}?>" class="form-control" id="anno" placeholder="Anno di pubblicazione..." name="anno">
             </div>
             <div class="mb-3">
                 <label for="genere" class="form-label">Genere</label>
-                <input type="text" class="form-control" id="genere" placeholder="Genere..." name="genere">
+                <input type="text" value="<?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){
+                    echo($book['genere']);} else {echo '';}?>" class="form-control" id="genere" placeholder="Genere..." name="genere">
             </div>
-            <button type="submit" class="btn btn-dark">Inserisci</button>
+            <button type="submit" class="btn btn-dark">
+                <?php if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){echo 'Modifica';} else{echo 'Inserisci';}?>
+            </button>
 
         </form>
     </div>

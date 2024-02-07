@@ -16,10 +16,13 @@ print_r($book);
 if(isset($_REQUEST['action']) && $_REQUEST['action'] === 'update'){
     editBook($mysqli, $book['id'], $book['titolo'], $book['autore'], $book['anno'], $book['genere']);
 }
+elseif (isset($_REQUEST['action']) && $_REQUEST['action'] === 'delete') {
+    removeBook($mysqli, $_REQUEST['id']);
+}
+
 else {
     insertBook($mysqli, $book['titolo'], $book['autore'], $book['anno'], $book['genere']);
 };
-
 
 
 ?>

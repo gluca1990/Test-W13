@@ -1,5 +1,17 @@
 <?php
 
+/* C - Create */
+function insertBook($mysqli, $titolo, $autore, $anno, $genere)
+{
+    $sql = "INSERT INTO books (titolo, autore, anno, genere) 
+                VALUES ('$titolo', '$autore', '$anno', '$genere');";
+    if (!$mysqli->query($sql)) {
+        echo ($mysqli->connect_error);
+    } else {
+        header('Location: http://localhost/Test-W13/index.php');
+    }
+}
+
 /* R - Read */
 function getAllBooks($mysqli)
 {
@@ -13,26 +25,7 @@ function getAllBooks($mysqli)
     }
     return $result;
 }
-/* C - Create */
-function insertBook($mysqli, $titolo, $autore, $anno, $genere)
-{
-    $sql = "INSERT INTO books (titolo, autore, anno, genere) 
-                VALUES ('$titolo', '$autore', '$anno', '$genere');";
-    if (!$mysqli->query($sql)) {
-        echo ($mysqli->connect_error);
-    } else {
-        header('Location: http://localhost/Test-W13/index.php');
-    }
-}
-/* D - Delete */
-function removeBook($mysqli, $id)
-{
-    if (!$mysqli->query('DELETE FROM books WHERE id = ' . $id)) {
-        echo ($mysqli->connect_error);
-    } else {
-        header('Location: http://localhost/Test-W13/index.php');
-    }
-}
+
 /* U - Update */
 function getBookByID($mysqli)
 {
@@ -46,16 +39,25 @@ function getBookByID($mysqli)
 
 function editBook($mysqli, $id, $titolo, $autore, $anno, $genere)
 {
-    /* "UPDATE `books` SET `titolo` = " . $titolo . ", `autore` = " . $autore . ", `anno` = " . $anno . ", `genere` = " . $genere ." WHERE `books`.`id` = " . $id; */
-
     $sql = "UPDATE books SET 
             titolo = '" . $titolo . "', 
             autore = '" . $autore . "', 
             anno = '" . $anno . "', 
             genere = '" . $genere . "'
             WHERE books.id = " . $id . ";";
-    #$mysqli->query($sql);
+
     if(!$mysqli->query($sql)) { echo($mysqli->connect_error); }
     else { header('Location: http://localhost/Test-W13/index.php');}
 }
+
+/* D - Delete */
+function removeBook($mysqli, $id)
+{
+    if (!$mysqli->query('DELETE FROM books WHERE id = ' . $id)) {
+        echo ($mysqli->connect_error);
+    } else {
+        header('Location: http://localhost/Test-W13/index.php');
+    }
+}
+
 ?>
