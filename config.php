@@ -25,7 +25,7 @@ if (!$mysqli->query($sql)) {
 $mysqli->query('USE mylibrary;');
 
 // Creo la tabella
-$sql = 'CREATE TABLE IF NOT EXISTS `mylibrary`.`books` (`id` INT NOT NULL AUTO_INCREMENT , `titolo` VARCHAR(50) NOT NULL , `autore` VARCHAR(50) NOT NULL , `anno` INT NOT NULL , `genere` INT NOT NULL , PRIMARY KEY (`id`));';
+$sql = 'CREATE TABLE IF NOT EXISTS `mylibrary`.`books` (`id` INT NOT NULL AUTO_INCREMENT , `titolo` VARCHAR(50) NOT NULL , `autore` VARCHAR(50) NOT NULL , `anno` INT NOT NULL , `genere` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`));';
 if(!$mysqli->query($sql)) { die($mysqli->connect_error); }
 
 ?>
